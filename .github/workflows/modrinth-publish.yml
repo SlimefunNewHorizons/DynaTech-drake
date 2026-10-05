@@ -122,7 +122,7 @@ jobs:
       - name: Clonar dependencias DrakesCraft Maven Repo
         run: |
           mkdir -p ~/.m2/repository
-          git clone --depth 1 https://github.com/DrakesCraft-Labs/maven-repo.git /tmp/drakes-maven-repo
+          git clone --depth 1 https://github.com/SlimefunNewHorizons/maven-repo.git /tmp/drakes-maven-repo
           cp -rn /tmp/drakes-maven-repo/com ~/.m2/repository/ || true
           python3 -c "
           import os, shutil
