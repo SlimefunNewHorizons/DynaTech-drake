@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.google.common.base.Preconditions;
 
-import com.github.drakescraft_labs.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import me.profelements.dynatech.registries.Registries;
 import me.profelements.dynatech.registries.TypedKey;
 

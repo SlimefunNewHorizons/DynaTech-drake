@@ -2,10 +2,10 @@ package me.profelements.dynatech.registries;
 
 import org.bukkit.Material;
 
-import dev.drake.dough.items.CustomItemStack;
-import com.github.drakescraft_labs.slimefun4.api.items.ItemGroup;
-import com.github.drakescraft_labs.slimefun4.api.items.groups.NestedItemGroup;
-import com.github.drakescraft_labs.slimefun4.api.items.groups.SubItemGroup;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.groups.NestedItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 
 public class ItemGroups {
 

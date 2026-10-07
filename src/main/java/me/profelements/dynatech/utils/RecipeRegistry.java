@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
-import com.github.drakescraft_labs.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 
 public class RecipeRegistry {
     private static final ArrayList<Recipe> RECIPES = new ArrayList<>();

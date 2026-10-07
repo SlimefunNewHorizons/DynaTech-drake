@@ -7,11 +7,11 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
 
-import dev.drake.dough.blocks.BlockPosition;
-import com.github.drakescraft_labs.slimefun4.core.attributes.ItemAttribute;
-import com.github.drakescraft_labs.slimefun4.utils.NumberUtils;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.blocks.BlockPosition;
+import io.github.thebusybiscuit.slimefun4.core.attributes.ItemAttribute;
+import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import com.github.drakescraft_labs.slimefun4.legacy.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.profelements.dynatech.DynaTech;
 
 /**

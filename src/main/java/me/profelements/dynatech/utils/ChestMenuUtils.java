@@ -15,9 +15,9 @@ import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 
 public class ChestMenuUtils {
 
-    private static final ItemStack BACKGROUND_ITEM = com.github.drakescraft_labs.slimefun4.utils.ChestMenuUtils
+    private static final ItemStack BACKGROUND_ITEM = io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils
             .getBackground();
-    private static final MenuClickHandler NO_CLICK = com.github.drakescraft_labs.slimefun4.utils.ChestMenuUtils
+    private static final MenuClickHandler NO_CLICK = io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils
             .getEmptyClickHandler();
 
     public static void openRecipeBook(Player p) {
@@ -55,7 +55,7 @@ public class ChestMenuUtils {
         ChestMenu menu = new ChestMenu("Recipe");
         menu.setEmptySlotsClickable(false);
 
-        menu.addItem(0, com.github.drakescraft_labs.slimefun4.utils.ChestMenuUtils.getBackButton(p, ""),
+        menu.addItem(0, io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils.getBackButton(p, ""),
                 new MenuClickHandler() {
                     @Override
                     public boolean onClick(Player p, int slot, ItemStack item, ClickAction action) {
@@ -98,7 +98,7 @@ public class ChestMenuUtils {
 
         // air , air , air
         menu.addItem(36,
-                com.github.drakescraft_labs.slimefun4.utils.ChestMenuUtils.getPreviousButton(p, idx + 1, recipes.size()),
+                io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils.getPreviousButton(p, idx + 1, recipes.size()),
                 new MenuClickHandler() {
 
                     @Override
@@ -110,7 +110,7 @@ public class ChestMenuUtils {
                 });
 
         menu.addItem(44,
-                com.github.drakescraft_labs.slimefun4.utils.ChestMenuUtils.getNextButton(p, idx + 1, recipes.size()),
+                io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils.getNextButton(p, idx + 1, recipes.size()),
                 new MenuClickHandler() {
 
                     @Override

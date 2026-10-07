@@ -1,7 +1,7 @@
 package me.profelements.dynatech.registries;
 
-import com.github.drakescraft_labs.slimefun4.api.items.ItemGroup;
-import com.github.drakescraft_labs.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import me.profelements.dynatech.utils.ItemWrapper;
 import me.profelements.dynatech.utils.Recipe;
 

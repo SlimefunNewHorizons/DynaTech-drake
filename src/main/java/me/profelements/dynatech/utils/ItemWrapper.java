@@ -5,7 +5,7 @@ import me.profelements.dynatech.registries.Registries;
 
 import com.google.common.base.Preconditions;
 
-import com.github.drakescraft_labs.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 
 public record ItemWrapper(TypedKey<ItemWrapper> key, SlimefunItemStack stack) {
 
