@@ -17,7 +17,7 @@
         <lombok.version>1.18.46</lombok.version>
         <dough.version>1.3.1-DRAKE-v11-SNAPSHOT</dough.version>
         <exoticgarden.version>11.0-Drake-1.21.1-SNAPSHOT</exoticgarden.version>
-        <infinitylib.version>1.3.11-DRAKE-SNAPSHOT</infinitylib.version>
+        <infinitylib.version>1.3.11-UNIVERSAL-26x-SNAPSHOT</infinitylib.version>
         <sefilib.version>0.3.1-DRAKE-SNAPSHOT</sefilib.version>
         <networks.version>11.0.0-drake.6</networks.version>
         <gastronomicon.version>1.21.11-Drake.1</gastronomicon.version>
@@ -345,7 +345,7 @@
         <dependency>
             <groupId>com.github.drakescraft_labs</groupId>
             <artifactId>InfinityExpansion-drake</artifactId>
-            <version>1.20.6-Drake-SNAPSHOT</version>
+            <version>1.20.6-UNIVERSAL-26x-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
