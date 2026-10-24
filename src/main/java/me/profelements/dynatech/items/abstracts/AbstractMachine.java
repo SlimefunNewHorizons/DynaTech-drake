@@ -45,6 +45,24 @@ public abstract class AbstractMachine extends AbstractTickingContainer implement
         return true;
     }
 
+    /**
+     * Preserve DynaTech's actual layout when Slimefun returns an unfinished operation on shutdown.
+     */
+    @Nonnull
+    @Override
+    public int[] getRefundInputSlots() {
+        return getInputSlots();
+    }
+
+    /**
+     * Preserve DynaTech's actual layout when Slimefun returns a finished operation on shutdown.
+     */
+    @Nonnull
+    @Override
+    public int[] getRefundOutputSlots() {
+        return getOutputSlots();
+    }
+
     @Nullable 
     public abstract MachineRecipe findNextRecipe(BlockMenu menu);
 
