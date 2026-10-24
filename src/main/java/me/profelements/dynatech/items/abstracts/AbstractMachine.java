@@ -36,6 +36,14 @@ public abstract class AbstractMachine extends AbstractTickingContainer implement
         return processor; 
     }
 
+    /**
+     * DynaTech removes recipe inputs before registering the operation. This opt-in lets
+     * newer Slimefun cores return those inputs safely during a server shutdown.
+     */
+    public boolean canRefundInFlightOperation() {
+        return true;
+    }
+
     @Nullable 
     public abstract MachineRecipe findNextRecipe(BlockMenu menu);
 
