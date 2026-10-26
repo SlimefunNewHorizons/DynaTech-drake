@@ -92,6 +92,23 @@ public abstract class AbstractMachine extends AbstractTickingContainer implement
         menu.dropItems(l, getInputSlots());
         menu.dropItems(l, getOutputSlots());
 
+        CraftingOperation currentOp = processor.getOperation(e.getBlock());
+        if (currentOp != null && canRefundInFlightOperation() && currentOp.markRefunded()) {
+            if (currentOp.isFinished()) {
+                for (ItemStack result : currentOp.getResults()) {
+                    if (result != null && !result.getType().isAir()) {
+                        l.getWorld().dropItemNaturally(l, result.clone());
+                    }
+                }
+            } else {
+                for (ItemStack ingredient : currentOp.getIngredients()) {
+                    if (ingredient != null && !ingredient.getType().isAir()) {
+                        l.getWorld().dropItemNaturally(l, ingredient.clone());
+                    }
+                }
+            }
+        }
+
         processor.endOperation(e.getBlock()); 
     }
 
@@ -107,6 +124,10 @@ public abstract class AbstractMachine extends AbstractTickingContainer implement
                     currentOp.addProgress(1);
                 } else {
                     menu.replaceExistingItem(getProgressSlot(), new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " ")); 
+
+                    if (!currentOp.markRefunded()) {
+                        return;
+                    }
 
                     boolean isFinished = onCraftFinish(menu, currentOp.getIngredients()); 
                     if (isFinished) {
