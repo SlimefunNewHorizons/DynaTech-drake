@@ -69,6 +69,19 @@ mvn clean package
 
 Ubica el archivo compilado `DynaTech-drake-v1.5.0.jar` en la carpeta `plugins/` de tu servidor Minecraft Paper/Purpur 1.21.11.
 
+Las dependencias se resuelven desde el repositorio Maven de Drake, <https://maven.drakescraft.cl> (GitHub Pages de
+[`SlimefunNewHorizons/maven-repo`](https://github.com/SlimefunNewHorizons/maven-repo)):
+
+| Línea | Core | Java |
+|---|---|---|
+| 1.21.11 (producción) | `slimefun-core 11.0-Drake-1.21.11-SNAPSHOT` | 21 |
+| Universal 26.x (Paper 26.2) | `slimefun-core 11.0-Universal-26.x-SNAPSHOT` + `dough-core 1.3.1-Universal-26.x-SNAPSHOT` | 25 |
+
+Para usar un jar ya compilado en la línea 26.x, pórtalo con `scripts/portar_addons.py <input> <output>` de `ai-hub`
+(relocaliza el paquete del fork de Dallas al universal y sube `api-version` a 1.21).
+
+La línea 1.21.11 requiere `slimefun-core` build 4 o superior (usa `getRefundInputSlots`).
+
 ---
 
 <div align="center">
