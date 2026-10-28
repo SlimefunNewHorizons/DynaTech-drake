@@ -4,7 +4,7 @@
 
 # ⚡ DynaTech-Drake
 
-**Automatización de Hidroponía, Cocina Automatizada, Lavadores de Minerales y Almacenamiento Cuántico para Slimefun4**
+**Hydroponics Automation, Automated Cooking, Ore Washers and Quantum Storage for Slimefun4**
 
 <p>
   <a href="https://github.com/SlimefunNewHorizons/DynaTech-drake"><img src="https://img.shields.io/badge/GitHub-DynaTech--Drake-181717?style=for-the-badge&logo=github" alt="GitHub"/></a>
@@ -15,114 +15,114 @@
 
 </div>
 
-> ### 🏰 ¡Únete a la Comunidad Oficial de DrakesCraft!
+> ### 🏰 Join the Official DrakesCraft Community!
 > 
-> * 🎮 **IP del Servidor**: `mc.drakescraft.cl` *(Java 1.21.11 & Bedrock)*
-> * 💬 **Discord Oficial**: [discord.gg/drakescraft](https://discord.gg/rv3vtXZTk7)
-> * 🌐 **Web & Guía**: [web.drakescraft.cl](https://web.drakescraft.cl) — 🛒 **Tienda**: [web.drakescraft.cl/store](https://web.drakescraft.cl/store.html)
+> * 🎮 **Server IP**: `mc.drakescraft.cl` *(Java 1.21.11 & Bedrock)*
+> * 💬 **Official Discord**: [discord.gg/drakescraft](https://discord.gg/rv3vtXZTk7)
+> * 🌐 **Web & Guide**: [web.drakescraft.cl](https://web.drakescraft.cl) — 🛒 **Store**: [web.drakescraft.cl/store](https://web.drakescraft.cl/store.html)
 > 
-> *¡Juega con este addon y más de 80 expansiones optimizadas en vivo en nuestra network de supervivencia técnica!*
+> *Play with this addon and 80+ more optimized expansions live on our technical survival network!*
 
 ---
 
 ---
 
-## ⚡ ¿Qué es DynaTech-Drake?
+## ⚡ What is DynaTech-Drake?
 
-`DynaTech-drake` es un addon de Slimefun4 enfocado en la **automatización agrícola, de cocina, procesamiento de minerales y logística inalámbrica** para DrakesCraft.
-
----
-
-## 🧰 Máquinas y Sistemas Destacados
-
-### 1. 🌿 Hidroponía & Agricultura Automática
-- **Cámara Hidropónica (Hydroponics Chamber)**: Cultiva semillas, vegetales y plantas de Slimefun de forma 100% automatizada consumiendo energía y agua.
-- **Cosechadora Eléctrica**: Cosecha automáticamente cultivos maduros dentro de un radio configurable.
-
-### 2. 🍲 Auto-Kitchen & Cocina Automatizada
-- **Cocina Automática (Auto-Kitchen)**: Prepara automáticamente comidas complejas de ExoticGarden y Slimefun sin intervención manual.
-
-### 3. 💎 Lavador de Minerales & Prensa de Materiales
-- **Lavador de Minerales Automático (Ore Washer)**: Procesa grava y mineral tamizado para extraer polvos metálicos (Hierro, Oro, Cobre, Plomo, Plata, Magnesio).
-- **Prensa de Materiales (Material Press)**: Comprime polvos en lingotes y bloques compactos.
-
-### 4. 📦 Almacenamiento Cuántico & Carga Inalámbrica
-- **Almacenador Cuántico (Quantum Storage)**: Almacena millones de unidades de un solo tipo de ítem en un único bloque.
-- **Cargador Inalámbrico (Wireless Charger)**: Recarga automáticamente la armadura y herramientas eléctricas de los jugadores cercanos.
+`DynaTech-drake` is a Slimefun4 addon focused on **farming automation, cooking, ore processing and wireless logistics** for DrakesCraft.
 
 ---
 
-## ⚡ Aceleración Nativa en Rust (Modelo Híbrido Cero-Riesgo)
+## 🧰 Featured Machines and Systems
 
-`DynaTech-drake` incluye el puente Panama FFM **`RustNativeBridge`** para delegar el cálculo de crecimiento hidropónico y procesamiento de minerales al motor nativo `Slimefun-Rust` (`slimefun_ffi`):
-- 🚀 **Procesamiento de Ticks en Nanosegundos**: Sin sobrecarga de CPU ni pausas de Garbage Collector.
-- 🛡️ **Preservación Total sin Reset (SQLite 0-Reset)**: Interfaz 1:1 con la base de datos `stored-blocks.db`.
+### 1. 🌿 Hydroponics & Automated Farming
+- **Hydroponics Chamber**: Grows seeds, vegetables and Slimefun plants fully automatically, consuming energy and water.
+- **Electric Harvester**: Automatically harvests mature crops within a configurable radius.
+
+### 2. 🍲 Auto-Kitchen & Automated Cooking
+- **Auto-Kitchen**: Automatically prepares complex ExoticGarden and Slimefun meals with no manual intervention.
+
+### 3. 💎 Ore Washer & Material Press
+- **Automatic Ore Washer**: Processes gravel and sifted ore to extract metal dusts (Iron, Gold, Copper, Lead, Silver, Magnesium).
+- **Material Press**: Compresses dusts into ingots and compact blocks.
+
+### 4. 📦 Quantum Storage & Wireless Charging
+- **Quantum Storage**: Stores millions of units of a single item type in one block.
+- **Wireless Charger**: Automatically recharges the electric armor and tools of nearby players.
 
 ---
 
-## 🛠️ Compilación e Instalación
+## ⚡ Native Rust Acceleration (Zero-Risk Hybrid Model)
+
+`DynaTech-drake` includes the Panama FFM bridge **`RustNativeBridge`** to delegate hydroponic growth and ore processing calculations to the native `Slimefun-Rust` engine (`slimefun_ffi`):
+- 🚀 **Nanosecond Tick Processing**: No CPU overhead or Garbage Collector pauses.
+- 🛡️ **Full Preservation, No Reset (SQLite 0-Reset)**: 1:1 interface with the `stored-blocks.db` database.
+
+---
+
+## 🛠️ Build and Installation
 
 ```bash
-# Compilar paquete JAR con Maven
+# Build the JAR package with Maven
 mvn clean package
 ```
 
-Ubica el archivo compilado `DynaTech-drake-v1.5.0.jar` en la carpeta `plugins/` de tu servidor Minecraft Paper/Purpur 1.21.11.
+Place the built `DynaTech-drake-v1.5.0.jar` in the `plugins/` folder of your Paper/Purpur 1.21.11 Minecraft server.
 
-Las dependencias se resuelven desde el repositorio Maven de Drake, <https://maven.drakescraft.cl> (GitHub Pages de
+Dependencies are resolved from the Drake Maven repository, <https://maven.drakescraft.cl> (GitHub Pages of
 [`SlimefunNewHorizons/maven-repo`](https://github.com/SlimefunNewHorizons/maven-repo)):
 
-| Línea | Core | Java |
+| Line | Core | Java |
 |---|---|---|
-| 1.21.11 (producción) | `slimefun-core 11.0-Drake-1.21.11-SNAPSHOT` | 21 |
+| 1.21.11 (production) | `slimefun-core 11.0-Drake-1.21.11-SNAPSHOT` | 21 |
 | Universal 26.x (Paper 26.2) | `slimefun-core 11.0-Universal-26.x-SNAPSHOT` + `dough-core 1.3.1-Universal-26.x-SNAPSHOT` | 25 |
 
-Para usar un jar ya compilado en la línea 26.x, pórtalo con `scripts/portar_addons.py <input> <output>` de `ai-hub`
-(relocaliza el paquete del fork de Dallas al universal y sube `api-version` a 1.21).
+To use an already built jar on the 26.x line, port it with `scripts/portar_addons.py <input> <output>` from `ai-hub`
+(it relocates the package from the Dallas fork to the universal one and raises `api-version` to 1.21).
 
-La línea 1.21.11 requiere `slimefun-core` build 4 o superior (usa `getRefundInputSlots`).
+The 1.21.11 line requires `slimefun-core` build 4 or later (it uses `getRefundInputSlots`).
 
 ---
 
 <div align="center">
 
-**DrakesCraft Labs** · Mantenido por [**JackStar6677-1**](https://github.com/JackStar6677-1)
+**DrakesCraft Labs** · Maintained by [**JackStar6677-1**](https://github.com/JackStar6677-1)
 
 </div>
 
-## Qué añade al juego
+## What it adds to the game
 
 A slimefun addon that add random stuff I want
-Registra alrededor de **97 objetos** en la guía de Slimefun.
+Registers around **97 items** in the Slimefun guide.
 
-Todo se fabrica y se investiga desde la guía normal (`/sf guide`), como cualquier otro contenido
-de Slimefun: no hace falta ningún comando especial para empezar.
+Everything is crafted and researched from the normal guide (`/sf guide`), like any other Slimefun
+content: no special command is needed to get started.
 
-## Compatibilidad
+## Compatibility
 
 | | |
 |---|---|
-| Servidor | Paper / Purpur **1.21.11** |
+| Server | Paper / Purpur **1.21.11** |
 | Java | **21** |
-| Requiere | [Slimefun4-Drake](https://github.com/SlimefunNewHorizons/Slimefun4-Drake) |
-| Lado | Solo servidor — quien juega no instala nada |
-| Versión | ${project.version} |
+| Requires | [Slimefun4-Drake](https://github.com/SlimefunNewHorizons/Slimefun4-Drake) |
+| Side | Server-side only — players install nothing |
+| Version | ${project.version} |
 
-## Instalación
+## Installation
 
-1. Descarga el `.jar` de la última versión.
-2. Déjalo en la carpeta `plugins/` del servidor, junto a Slimefun.
-3. Reinicia el servidor. Los objetos aparecen solos en la guía.
+1. Download the `.jar` of the latest version.
+2. Drop it in the server's `plugins/` folder, next to Slimefun.
+3. Restart the server. The items appear in the guide on their own.
 
-> Este addon está portado al fork de Slimefun de DrakesCraft. Con el Slimefun original puede no
-> cargar, porque cambia el espacio de nombres de las clases.
+> This addon is ported to the DrakesCraft Slimefun fork. It may fail to load with the original
+> Slimefun, because the class namespace changes.
 
-## Créditos
+## Credits
 - ProfElements
 
-Port y mantenimiento por **DrakesCraft Labs**. La autoría original es de quien figura arriba; el detalle está en [docs/UPSTREAM_ATTRIBUTION.md](https://raw.githubusercontent.com/SlimefunNewHorizons/DynaTech-drake/main/docs/UPSTREAM_ATTRIBUTION.md).
+Port and maintenance by **DrakesCraft Labs**. Original authorship belongs to those listed above; details are in [docs/UPSTREAM_ATTRIBUTION.md](https://raw.githubusercontent.com/SlimefunNewHorizons/DynaTech-drake/main/docs/UPSTREAM_ATTRIBUTION.md).
 
-Licencia **MIT**.
+License **MIT**.
 
 ---
 
