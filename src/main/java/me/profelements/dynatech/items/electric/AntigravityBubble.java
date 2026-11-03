@@ -57,10 +57,18 @@ public class AntigravityBubble extends AbstractElectricTicker implements Listene
             if (player == null) {
                 continue;
             }
-            player.setAllowFlight(false);
-            player.setFlying(false);
-            player.setFallDistance(0.f);
+            retirarVuelo(player);
         }
+    }
+
+    /** No retira el vuelo que no es de la burbuja (Gema Angelical activa o permiso de fly). */
+    private static void retirarVuelo(Player player) {
+        if (me.profelements.dynatech.items.tools.AngelGem.vueloProtegido(player)) {
+            return;
+        }
+        player.setAllowFlight(false);
+        player.setFlying(false);
+        player.setFallDistance(0.f);
     }
 
     /**
@@ -77,9 +85,7 @@ public class AntigravityBubble extends AbstractElectricTicker implements Listene
 
         for (Set<UUID> registrados : enabledPlayers.values()) {
             if (registrados.remove(id)) {
-                player.setAllowFlight(false);
-                player.setFlying(false);
-                player.setFallDistance(0.f);
+                retirarVuelo(player);
             }
         }
     }
@@ -93,9 +99,7 @@ public class AntigravityBubble extends AbstractElectricTicker implements Listene
                     Player p = Bukkit.getPlayer(iterator.next()); 
 
                      if (p != null) {
-                        p.setAllowFlight(false);
-                        p.setFlying(false);
-                        p.setFallDistance(0.f);
+                        retirarVuelo(p);
 
                         iterator.remove();
                     }      
@@ -140,9 +144,7 @@ public class AntigravityBubble extends AbstractElectricTicker implements Listene
             }
 
             if (!bubbledEntities.contains(p)) {
-                p.setAllowFlight(false);
-                p.setFlying(false);
-                p.setFallDistance(0.f);
+                retirarVuelo(p);
 
                 iterator.remove();
             }

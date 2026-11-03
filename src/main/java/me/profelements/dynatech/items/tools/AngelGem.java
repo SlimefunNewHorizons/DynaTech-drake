@@ -59,7 +59,7 @@ public class AngelGem extends SlimefunItem implements Rechargeable, NotPlaceable
     public static final Set<UUID> enabledFlightUsers = Collections.synchronizedSet(new HashSet<>());
     public static final Map<UUID, Long> fallImmunity = new ConcurrentHashMap<>();
 
-    private float flySpeed = 0.1f;
+    private final Map<UUID, Float> velocidades = new ConcurrentHashMap<>();
 
     public AngelGem(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
@@ -145,9 +145,7 @@ public class AngelGem extends SlimefunItem implements Rechargeable, NotPlaceable
     }
 
     private boolean hasPermanentFlightPermission(Player p) {
-        return p.hasPermission("cmi.command.fly")
-                || p.hasPermission("essentials.fly")
-                || p.hasPermission("drakescraft.vip.fly");
+        return tienePermisoFly(p);
     }
 
     private ItemStack findAngelGem(Player p) {
@@ -201,7 +199,10 @@ public class AngelGem extends SlimefunItem implements Rechargeable, NotPlaceable
                 return;
             }
 
-            if (!enabledFlightUsers.contains(p.getUniqueId()) && !p.getAllowFlight()) {
+            // El estado "activo" es el de la gema, no p.getAllowFlight(): la Burbuja Antigravedad y los
+            // permisos de fly tambien lo encienden, y con eso el clic derecho caia en "ajustar velocidad"
+            // sin registrar nunca el vuelo (sin gasto de energia y sin poder activarla).
+            if (!enabledFlightUsers.contains(p.getUniqueId())) {
                 float charge = getItemCharge(e.getItem());
                 if (charge < getEnergyConsumption()) {
                     p.sendMessage(ChatColor.RED + "⚡ ¡La Gema Angelical no tiene suficiente energía! Cárgala en un Banco de Carga de Slimefun.");
@@ -212,33 +213,26 @@ public class AngelGem extends SlimefunItem implements Rechargeable, NotPlaceable
 
                 enabledFlightUsers.add(p.getUniqueId());
                 p.setAllowFlight(true);
-                setFlySpeed(0.10f);
-                p.setFlySpeed(getFlySpeed());
+                setFlySpeed(p, 0.10f);
                 p.sendMessage(ChatColor.GREEN + "⚡ Vuelo angelical activado. (" + (int) charge
                         + " J disponibles - Consumo: " + (int) getEnergyConsumption() + " J/s)");
                 p.playSound(p.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 1.0f, 1.2f);
             } else {
+                float actual = getFlySpeed(p);
                 if (hasMaxFlightSpeed.getValue()) {
-                    if (getFlySpeed() < maxFlightSpeed.getValue()) {
-                        if (getFlySpeed() + 0.05f > maxFlightSpeed.getValue()) {
-                            setFlySpeed(maxFlightSpeed.getValue().floatValue());
-                        } else {
-                            setFlySpeed(getFlySpeed() + 0.05f);
-                        }
+                    float tope = maxFlightSpeed.getValue().floatValue();
+                    if (actual < tope) {
+                        setFlySpeed(p, Math.min(actual + 0.05f, tope));
                     } else {
-                        setFlySpeed(0.10f);
+                        setFlySpeed(p, 0.10f);
                     }
                 } else {
-                    if (getFlySpeed() < 0.25f) {
-                        setFlySpeed(getFlySpeed() + 0.05f);
-                    } else {
-                        setFlySpeed(0.10f);
-                    }
+                    setFlySpeed(p, actual < 0.25f ? actual + 0.05f : 0.10f);
                 }
-                p.sendMessage(ChatColor.AQUA + "⚡ Velocidad de vuelo ajustada a: " + getFlySpeed());
+                p.sendMessage(ChatColor.AQUA + "⚡ Velocidad de vuelo ajustada a: " + getFlySpeed(p));
             }
 
-            p.setFlySpeed(getFlySpeed());
+            p.setFlySpeed(getFlySpeed(p));
             e.getItem().setItemMeta(updateLore(e.getItem(), p));
             e.cancel();
         };
@@ -268,6 +262,7 @@ public class AngelGem extends SlimefunItem implements Rechargeable, NotPlaceable
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
+        velocidades.remove(e.getPlayer().getUniqueId());
         enabledFlightUsers.remove(e.getPlayer().getUniqueId());
         fallImmunity.remove(e.getPlayer().getUniqueId());
     }
@@ -304,7 +299,7 @@ public class AngelGem extends SlimefunItem implements Rechargeable, NotPlaceable
         }
 
         List<String> lore = im.getLore();
-        boolean active = p != null && p.getAllowFlight();
+        boolean active = p != null && enabledFlightUsers.contains(p.getUniqueId());
 
         for (int line = 0; line < lore.size(); line++) {
             String str = lore.get(line);
@@ -314,7 +309,7 @@ public class AngelGem extends SlimefunItem implements Rechargeable, NotPlaceable
             }
             if (str.contains("Flight Speed: ") || str.contains("Velocidad: ")) {
                 lore.set(line, ChatColor.GRAY + (str.contains("Velocidad") ? "Velocidad: " : "Flight Speed: ")
-                        + ChatColor.YELLOW + getFlySpeed());
+                        + ChatColor.YELLOW + (p != null ? getFlySpeed(p) : 0.10f));
             }
             // Consumo y capacidad salen de Items.yml (ticket 471), no del texto fijo.
             if (str.contains("Consumo: ")) {
@@ -341,16 +336,28 @@ public class AngelGem extends SlimefunItem implements Rechargeable, NotPlaceable
         return ChatColor.GRAY + "Capacidad: " + ChatColor.YELLOW + (int) energyCapacity.getValue().doubleValue() + " J";
     }
 
-    public float getFlySpeed() {
-        return flySpeed;
+    public float getFlySpeed(Player p) {
+        return velocidades.getOrDefault(p.getUniqueId(), 0.10f);
     }
 
-    public void setFlySpeed(float newFlySpeed) {
+    public void setFlySpeed(Player p, float newFlySpeed) {
         Preconditions.checkArgument(newFlySpeed > 0, "Must be greater then 0");
 
         BigDecimal bd = new BigDecimal(Float.toString(newFlySpeed));
         bd = bd.setScale(2, RoundingMode.DOWN);
-        flySpeed = bd.floatValue();
+        velocidades.put(p.getUniqueId(), bd.floatValue());
+        p.setFlySpeed(bd.floatValue());
+    }
+
+    /** Vuelo que otros sistemas (Burbuja Antigravedad) no deben retirar: gema activa o permiso de fly. */
+    public static boolean vueloProtegido(Player p) {
+        return enabledFlightUsers.contains(p.getUniqueId()) || tienePermisoFly(p);
+    }
+
+    private static boolean tienePermisoFly(Player p) {
+        return p.hasPermission("cmi.command.fly")
+                || p.hasPermission("essentials.fly")
+                || p.hasPermission("drakescraft.vip.fly");
     }
 
 }
