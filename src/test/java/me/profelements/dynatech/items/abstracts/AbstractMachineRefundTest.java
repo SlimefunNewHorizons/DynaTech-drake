@@ -33,15 +33,15 @@ class AbstractMachineRefundTest {
         ItemStack[] outputs = new ItemStack[] { new ItemStack(Material.GOLD_INGOT, 1) };
         CraftingOperation op = new CraftingOperation(inputs, outputs, 5);
 
-        Assertions.assertFalse(op.isRefunded(), "Operation should not be refunded initially");
+        Assertions.assertFalse(AbstractMachine.isOperationRefunded(op), "Operation should not be refunded initially");
         Assertions.assertFalse(op.isFinished(), "Operation should not be finished initially");
 
-        // First markRefunded succeeds
-        Assertions.assertTrue(op.markRefunded(), "First markRefunded must return true");
-        Assertions.assertTrue(op.isRefunded(), "isRefunded must be true after markRefunded");
+        // First markOperationRefunded succeeds
+        Assertions.assertTrue(AbstractMachine.markOperationRefunded(op), "First markOperationRefunded must return true");
+        Assertions.assertTrue(AbstractMachine.isOperationRefunded(op), "isOperationRefunded must be true after markOperationRefunded");
 
-        // Second markRefunded fails (idempotent / race protection)
-        Assertions.assertFalse(op.markRefunded(), "Second markRefunded must return false to prevent duplicate refund");
+        // Second markOperationRefunded fails (idempotent / race protection)
+        Assertions.assertFalse(AbstractMachine.markOperationRefunded(op), "Second markOperationRefunded must return false to prevent duplicate refund");
 
         // Ingredients are intact for in-flight refund
         Assertions.assertEquals(1, op.getIngredients().length);
@@ -59,7 +59,7 @@ class AbstractMachineRefundTest {
         op.addProgress(2);
         Assertions.assertTrue(op.isFinished(), "Operation with progress >= totalTicks must be finished");
 
-        Assertions.assertTrue(op.markRefunded());
+        Assertions.assertTrue(AbstractMachine.markOperationRefunded(op));
         Assertions.assertEquals(Material.DIAMOND, op.getResults()[0].getType());
     }
 }

@@ -57,10 +57,18 @@ public class AntigravityBubble extends AbstractElectricTicker implements Listene
             if (player == null) {
                 continue;
             }
-            player.setAllowFlight(false);
-            player.setFlying(false);
-            player.setFallDistance(0.f);
+            retirarVuelo(player);
         }
+    }
+
+    /** Do not revoke flight granted by an active Angel Gem or permanent flight permission. */
+    private static void retirarVuelo(Player player) {
+        if (me.profelements.dynatech.items.tools.AngelGem.vueloProtegido(player)) {
+            return;
+        }
+        player.setAllowFlight(false);
+        player.setFlying(false);
+        player.setFallDistance(0.f);
     }
 
     /**
@@ -77,33 +85,37 @@ public class AntigravityBubble extends AbstractElectricTicker implements Listene
 
         for (Set<UUID> registrados : enabledPlayers.values()) {
             if (registrados.remove(id)) {
-                player.setAllowFlight(false);
-                player.setFlying(false);
-                player.setFallDistance(0.f);
+                retirarVuelo(player);
             }
         }
     }
 
     @EventHandler
     public void onChunkUnload(ChunkUnloadEvent e) {
-        for (Map.Entry<Location, Set<UUID>> entry : enabledPlayers.entrySet()) {
-            if (entry.getKey().getChunk() == e.getChunk()) {
-                Set<UUID> players = enabledPlayers.getOrDefault(entry.getKey(), new HashSet<>());
-                for (Iterator<UUID> iterator = players.iterator(); iterator.hasNext();) {
-                    Player p = Bukkit.getPlayer(iterator.next()); 
+        revocarVueloEnChunk(enabledPlayers, e.getWorld(), e.getChunk().getX(), e.getChunk().getZ());
+    }
 
-                     if (p != null) {
-                        p.setAllowFlight(false);
-                        p.setFlying(false);
-                        p.setFallDistance(0.f);
-
-                        iterator.remove();
-                    }      
+    public static void revocarVueloEnChunk(Map<Location, Set<UUID>> mapa, org.bukkit.World world, int chunkX, int chunkZ) {
+        Iterator<Map.Entry<Location, Set<UUID>>> entryIt = mapa.entrySet().iterator();
+        while (entryIt.hasNext()) {
+            Map.Entry<Location, Set<UUID>> entry = entryIt.next();
+            if (mismoChunk(entry.getKey(), world, chunkX, chunkZ)) {
+                for (UUID uuid : entry.getValue()) {
+                    Player p = Bukkit.getPlayer(uuid);
+                    if (p != null) {
+                        retirarVuelo(p);
+                    }
                 }
-                break;
+                entryIt.remove();
             }
         }
-        enabledPlayers.entrySet().removeIf(entry -> entry.getKey().getChunk().equals(e.getChunk()));
+    }
+
+    public static boolean mismoChunk(Location loc, org.bukkit.World world, int chunkX, int chunkZ) {
+        return loc != null
+                && java.util.Objects.equals(loc.getWorld(), world)
+                && (loc.getBlockX() >> 4) == chunkX
+                && (loc.getBlockZ() >> 4) == chunkZ;
     }
 
 	@Override
@@ -140,9 +152,7 @@ public class AntigravityBubble extends AbstractElectricTicker implements Listene
             }
 
             if (!bubbledEntities.contains(p)) {
-                p.setAllowFlight(false);
-                p.setFlying(false);
-                p.setFallDistance(0.f);
+                retirarVuelo(p);
 
                 iterator.remove();
             }
